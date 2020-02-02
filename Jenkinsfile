@@ -33,7 +33,7 @@ node( 'docker-host' ) {
             }
             
             stage('Run INT-DEV Smoke Test') {
-                build job: smokeTestJob,
+                build job: 'docker-node-pipeline',
                 parameters:[string(name:'FHIRAPI_ENVIRONMENT_NAME_PARAMETER', value: 'HELLO3'), string(name:'GROUP', value: 'FhirApi')],
                 propagate: true,
                 wait: true
