@@ -7,7 +7,7 @@ properties([
     buildDiscarder(logRotator(daysToKeepStr: '7', numToKeepStr: '10')),
     disableConcurrentBuilds(),
     parameters([ 
-        choice( name: 'config_set', choices: ['api-dev'], description: 'env profile'),
+        choice( name: 'CONFIG', choices: ['api-dev'], description: 'AWS Env profile'),
         string(name: 'PYTHON_IMAGE', defaultValue: 'gwsu2008/jenkins-python3:3.8.1-boto3', description: 'Python3 docker image')
     ])
 ])
