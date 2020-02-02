@@ -46,7 +46,6 @@ node( 'docker-host' ) {
             currentBuild.result = 'SUCCESS'
         } catch (Exception e) {
             currentBuild.result = 'FAILURE'
-            error = catchException exception: e
             println("Caught exception: " + e)
         } finally {
             println("CurrentBuild result: " + currentBuild.result)
