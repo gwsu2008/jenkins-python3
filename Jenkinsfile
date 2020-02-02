@@ -22,15 +22,12 @@ node( 'docker-host' ) {
         try {
             println ("Python Image:" + python_image)
             dir(${WORKSPACE}) {
-                docker.image('localstack/localstack').withRun(
-                    '-p 33567-33583:4567-4583  -e SERVICES=sqs:4576 -e DEFAULT_REGION=us-west-2 -e HOSTNAME_EXTERNAL=localstack -v /var/run/docker.sock:/var/run/docker.sock')
-                    { 
-                        l -> docker.image('gwsu2008/jenkins-python3:3.8.1-boto3').inside("--link ${l.id}:localstack  -v /home/gsu/workspace/jenkins-python3:/usr/src/app") 
-                        {
-                            sh("ls -ltrh;pwd")
-                        }
-                    }
+                docker.image('gwsu2008/jenkins-python3:3.8.1-boto3').inside("-v /home/gsu/workspace/jenkins-python3:/usr/src/app") 
+                {
+                    sh("ls -ltrh;pwd")
+                }
             }
+            
         
             stage('Push to Intdev ECR') {
                 println("dpDockerizeService.pushImage(configParams, newImage, true)")
