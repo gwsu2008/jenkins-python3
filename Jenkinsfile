@@ -8,7 +8,7 @@ properties([
     disableConcurrentBuilds(),
     parameters([ 
         choice( name: 'config_set', choices: ['api-dev'], description: 'Name of the Configuration set to use'),
-        text(name: 'PYTHON_IMAGE', defaultValue: 'gwsu2008/jenkins-python3:3.8.1-boto3', description: 'Python3 docker image')
+        string(name: 'PYTHON_IMAGE', defaultValue: 'gwsu2008/jenkins-python3:3.8.1-boto3', description: 'Python3 docker image')
     ])
 ])
 
