@@ -3,8 +3,8 @@
 
 
 properties([
-    properties([disableConcurrentBuilds()])
-    buildDiscarder(logRotator(daysToKeepStr: '7', numToKeepStr: '10'))
+    disableConcurrentBuilds(),
+    buildDiscarder(logRotator(daysToKeepStr: '7', numToKeepStr: '10')),
     disableConcurrentBuilds(),
     parameters([ 
         choice( name: 'config_set', choices: ['api-dev'], description: 'Name of the Configuration set to use')
