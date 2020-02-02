@@ -7,7 +7,7 @@ properties([
     buildDiscarder(logRotator(daysToKeepStr: '7', numToKeepStr: '10')),
     disableConcurrentBuilds(),
     parameters([ 
-        choice( name: 'config_set', choices: ['api-dev'], description: 'Name of the Configuration set to use'),
+        choice( name: 'config_set', choices: ['api-dev'], description: 'env profile'),
         string(name: 'PYTHON_IMAGE', defaultValue: 'gwsu2008/jenkins-python3:3.8.1-boto3', description: 'Python3 docker image')
     ])
 ])
@@ -28,11 +28,11 @@ node( 'docker-host' ) {
             }
             
         
-            stage('Push to Intdev ECR') {
+            stage('Push image to ECR') {
                 println("dpDockerizeService.pushImage(configParams, newImage, true)")
             }
             
-            stage('Run INT-DEV Smoke Test') {
+            stage('Run Smoke Test') {
                 build job: 'docker-node-pipeline',
                 parameters:[string(name:'FHIRAPI_ENVIRONMENT_NAME_PARAMETER', value: 'HELLO3'), string(name:'GROUP', value: 'FhirApi')],
                 propagate: true,
