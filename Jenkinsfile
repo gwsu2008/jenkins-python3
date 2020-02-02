@@ -21,11 +21,9 @@ node( 'docker-host' ) {
     timestamps {
         try {
             println ("Python Image:" + python_image)
-            dir(${WORKSPACE}) {
-                docker.image('gwsu2008/jenkins-python3:3.8.1-boto3').inside {
-                    stage('Run Python') {
-                        sh 'python --version'
-                    }
+            docker.image('gwsu2008/jenkins-python3:3.8.1-boto3').inside('-v $HOME/.m2:/root/.m2') {
+                stage('Run Python') {
+                    sh 'python --version'
                 }
             }
             
