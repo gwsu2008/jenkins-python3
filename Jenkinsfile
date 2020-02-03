@@ -29,15 +29,15 @@ node( 'docker-host' ) {
             
         
             stage('Push image to ECR') {
-                println("dpDockerizeService.pushImage(configParams, newImage, true)")
+                println("BuildDockerImage.pushImage(configParams, newImage, true)")
             }
             
-            stage('Run Smoke Test') {
-                build job: 'docker-node-pipeline',
-                parameters:[string(name:'FHIRAPI_ENVIRONMENT_NAME_PARAMETER', value: 'HELLO3'), string(name:'GROUP', value: 'FhirApi')],
-                propagate: true,
-                wait: true
-            }
+            // stage('Run Test') {
+            //     build job: 'docker-node-pipeline',
+            //     parameters:[string(name:'FHIRAPI_ENVIRONMENT_NAME_PARAMETER', value: 'HELLO3'), string(name:'GROUP', value: 'FhirApi')],
+            //     propagate: true,
+            //     wait: true
+            // }
 
             if (isBackToNormal()) {
                 println("Back to Normal")
